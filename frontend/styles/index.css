@@ -1,0 +1,129 @@
+@import url('variables.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* GLOBAL STYLES */
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: 'Montserrat';
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(to bottom, var(--dark-purple), var(--purple));
+  color: var(--white);
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: scroll;
+}
+
+.githubCommit{
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  background-color: var(--purple);
+  color: var(--white);
+}
+
+.head{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* IMG STYLES */
+.head > img{
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+/* NAV STYLES */
+nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+nav > ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+nav > ul > li{
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+nav > ul > li:hover{
+  cursor: pointer;
+  background-color: var(--purple);
+}
+
+/* MAIN STYLES */
+main{
+  margin-top: 10px;
+  text-align: center;
+}
+
+main > h1{
+  font-size: 2.5em;
+  margin: 10px;
+}
+
+main > p{
+  font-size: 1.2em;
+}
+
+.search{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px
+}
+
+.search > input{
+  width: 250px;
+  padding: 10px;
+  border-radius: 10px;
+  color: var(--purple);
+  border: none;
+}
+
+.search > input:focus{
+  outline: none;
+  border: 1px solid var(--purple);
+}
+
+.icon-search{
+  margin-left: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 2em;
+  background-color: var(--white);
+  color: var(--purple);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-search:hover{
+  background-color: var(--purple);
+  color: var(--white);
+}
+
+
+
+
