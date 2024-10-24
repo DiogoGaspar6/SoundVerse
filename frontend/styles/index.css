@@ -12,20 +12,37 @@
 body{
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(to bottom, var(--dark-purple), var(--purple));
+  background-color: var(--dark-purple);
   color: var(--white);
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: scroll;
 }
 
+/* STYLES FOR API COMMIT */
 .githubCommit{
   width: 100%;
   padding: 5px;
   text-align: center;
   background-color: var(--purple);
   color: var(--white);
+  overflow: hidden;
+  white-space: nowrap;
 }
+
+.githubCommit p{
+  display: inline-block;
+  animation: scrolling 20s linear infinite;
+}
+
+.githubCommit p a{
+  color: var(--white);
+  text-decoration: none;
+}
+
+.githubCommit p a:hover{
+  text-decoration: underline;
+}
+
 
 .head{
   display:flex;
@@ -35,7 +52,7 @@ body{
   padding: 10px 20px;
 }
 
-/* IMG STYLES */
+/* STYLE FOR LOGO */
 .head > img{
   width: 90px;
   height: 90px;
@@ -70,6 +87,11 @@ nav > ul > li:hover{
   background-color: var(--purple);
 }
 
+nav > ul > li > a{
+  text-decoration: none;
+  color: var(--white);
+}
+
 /* MAIN STYLES */
 main{
   margin-top: 10px;
@@ -85,6 +107,7 @@ main > p{
   font-size: 1.2em;
 }
 
+/* STYLES FOR SEARCH */
 .search{
   display: flex;
   flex-direction: row;
@@ -124,6 +147,105 @@ main > p{
   color: var(--white);
 }
 
+/* STYLES FOR RESULTS */
+.results{
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  text-align: left;
+  height: 50%;
+  overflow: scroll;
+}
+
+
+.top-musics{
+  width: 50%;
+}
+
+.music-item{
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  color: var(--white);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.music-item h2{
+  font-size: 2.2em;
+  margin: 0px 10px;
+}
+
+.music-item h3{
+  padding: 10px;
+}
+
+.music p{
+  padding: 10px;
+}
+
+.music-item a{
+  padding:10px;
+  border-radius: 2em;
+  margin-left: 10px;
+  color: var(--white);
+  background-color: var(--purple);
+  text-decoration: none;
+}
+
+.music-item a:hover{
+  background-color: var(--white);
+  color: var(--purple);
+}
+
+.all-musics{
+  margin-left: 20px;
+  width: 70%;
+}
+
+.about-us-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.information{
+  margin: 20px;
+}
+
+.information p{
+  margin: 10px;
+}
+
+.information img{
+  width: 150px;
+  height: 200px;
+  border-radius: 20px;
+}
+
+.information a{
+  text-decoration: none;
+  color: var(--white);
+}
+
+.information a:hover{
+  text-decoration: underline;
+}
+
+
+/* ANIMATION COMMIT */
+@keyframes scrolling {
+  0%{
+    transform: translateX(250%);
+  }
+
+  100%{
+    transform: translateX(-250%);
+  }
+}
 
 
 

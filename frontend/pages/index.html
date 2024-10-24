@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- GOOGLE ICONS -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
 
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/index.css" defer />
@@ -24,26 +26,65 @@
         <img src="../styles/images/SOUNDVERSE.png" alt="logotipo" />
         <nav>
           <ul>
-            <li>Sobre nos</li>
+            <li><a href="#about-us">Sobre nos</a></li>
           </ul>
         </nav>
       </div>
     </header>
     <main>
       <h1>Bem vindo 👋</h1>
-      <p>Pesquise o seu artista favorito e veja as suas musicas e muito mais!</p>
+      <p>
+        Pesquise o seu artista favorito e veja as suas musicas e muito mais!
+      </p>
 
       <div class="search">
         <input type="text" placeholder="Pesquise o seu artista favorito" />
-        <div class="icon-search"><span class="material-symbols-outlined"> search </span></div>
+        <div class="icon-search">
+          <span class="material-symbols-outlined"> search </span>
+        </div>
       </div>
 
       <div class="results">
-        <!-- here goes the results of the search -->
+        <div class="top-musics">
+          <h1>
+            Top Musics <span class="material-symbols-outlined"> star </span>
+          </h1>
+        </div>
+        <div class="all-musics">
+          <h1>
+            Musicas <span class="material-symbols-outlined"> music_note </span>
+          </h1>
+        </div>
       </div>
 
-      <div class="about-us">
-        
+      <div id="about-us" class="about-us">
+        <h1>Sobre nos</h1>
+        <div class="about-us-container">
+          <div class="left-about-us">
+            <div class="information">
+              <img src="../styles/images/logo-diogo.jpg" alt="Diogo Gaspar" />
+              <p>
+                Olá, sou o
+                <a href="https://github.com/DiogoGaspar6">Diogo Gaspar</a>
+                estudo no IPVC - ESTG <br />
+                estou no curso de Engenharia Informatica <br />
+                e moro em Vila Praia de Ancora
+              </p>
+            </div>
+          </div>
+          <div class="right-about-us">
+            <div class="information">
+              <img src="../styles/images/logo-diogo.jpg" alt="Diogo Gaspar" />
+              <p>
+                Olá, sou o
+                <a href="https://github.com/DiogoGaspar6">Diogo Gaspar</a>
+                estudo no IPVC - ESTG <br />
+                estou no curso de Engenharia Informatica <br />
+                e moro em Vila Praia de Ancora
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </body>
