@@ -3,16 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- GOOGLE ICONS -->
+    <!--* FAVICON -->
+    <link rel="shortcut icon" href="../styles/images/SOUNDVERSE.pngx" type="image/x-icon">
+
+    <!-- * GOOGLE ICONS -->
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
 
-    <!-- CSS -->
+    <!-- * CSS -->
     <link rel="stylesheet" href="../styles/index.css" defer />
 
-    <!-- SCRIPTS -->
+    <!-- * SCRIPTS -->
     <script src="../scripts/index.js"></script>
     <title>SoundVerse</title>
   </head>
@@ -20,7 +23,7 @@
     <header>
       <div class="githubCommit">
         <p>A carregar o ultimo commit..</p>
-        <!-- here i want to go the last commit from the github api and add the animation like scrolling to the left -->
+        <!-- * here i want to go the last commit from the github api and add the animation like scrolling to the left -->
       </div>
       <div class="head">
         <img src="../styles/images/SOUNDVERSE.png" alt="logotipo" />
@@ -32,14 +35,27 @@
       </div>
     </header>
     <main>
+      <div class="popup">
+        <div class="popup-content">
+          <span id="close" class="material-symbols-outlined" onclick="closePopup()"> close </span>
+          <div class="loading-popup"></div>
+          <h2 class="title-lyrics">Letra</h2>
+          <div id="lyrics-content" class="lyrics-container"></div>
+          <p id="lyrics-content"></p>
+          <h2 class="title-bio">Biografia</h2>
+          <div class="bio-container">
+            <p id="biography-content"></p>
+          </div>
+        </div>
+      </div>
       <h1>Bem vindo 👋</h1>
       <p>
         Pesquise o seu artista favorito e veja as suas musicas e muito mais!
       </p>
 
       <div class="search">
-        <input type="text" placeholder="Pesquise o seu artista favorito" />
-        <div class="icon-search">
+        <input type="text" id="search-input" name="search-input" placeholder="Pesquise o seu artista favorito" />
+        <div class="icon-search" onclick="searchArtist()">
           <span class="material-symbols-outlined"> search </span>
         </div>
       </div>
@@ -49,11 +65,13 @@
           <h1>
             Top Musics <span class="material-symbols-outlined"> star </span>
           </h1>
+          <div class="loading-topMusics"></div>
         </div>
         <div class="all-musics">
           <h1>
             Musicas <span class="material-symbols-outlined"> music_note </span>
           </h1>
+          <div class="loading-allMusics"></div>
         </div>
       </div>
 

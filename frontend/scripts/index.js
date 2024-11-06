@@ -1,3 +1,4 @@
+//* FETCH LAST-COMMIT
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const response = await fetch('api/github/last-commit')
@@ -11,8 +12,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 })
 
+//* FETCH TOP-MUSICS
 document.addEventListener('DOMContentLoaded', async() =>{
+  const loadingTopMusics = document.querySelector('.loading-topMusics')
   try{
+    loadingTopMusics.style.display = 'block'
     const response = await fetch('api/lastfm/all-music')
     const musics = await response.json()
     const topMusics = document.querySelector('.top-musics')
@@ -24,30 +28,162 @@ document.addEventListener('DOMContentLoaded', async() =>{
         <h2>${index + 1}</h2>
         <h3>${music.name}</h3>
         <p>${music.artist.name}</p>
-        <a href='${music.url}' target='_blank'>Ouve Agora</a>`
+        <a href='${music.url}' target='_blank'>Ouve Agora</a>
+        <button onclick="moreContent('${music.name}','${music.artist.name}')">Ver mais</button>`
         topMusics.appendChild(musicDiv)
     })
   }catch(error){
-    console.log('ERROR: ' + error)
+    console.error('ERROR: ' + error)
+  } finally {
+    loadingTopMusics.style.display = 'none'
   }
 })
 
+//* FETCH ALL-MUSICS
 document.addEventListener('DOMContentLoaded', async() =>{
+  const loadingAllMuscis = document.querySelector('.loading-allMusics')
   try{
-    const response = await fetch('api/spotify/all-music')
+    loadingAllMuscis.style.display = 'block'
+    const response = await fetch('api/spotify/all-tracks')
     const musics = await response.json()
-    const topMusics = document.querySelector('.all-musics')
+    const allMusics = document.querySelector('.all-musics')
     console.log(musics)
     musics.forEach((music) => {
       const musicDiv = document.createElement('div')
       musicDiv.classList.add('music-item')
       musicDiv.innerHTML = `
         <h3>${music.name}</h3>
-        <p>${music.artists[0].name}</p>
-        <a href='${music.external_urls.spotify}' target='_blank'>Ouve Agora</a>`
-        topMusics.appendChild(musicDiv)
+        <p>${music.artists.map(artist => artist.name).join(', ')}</p>
+        <a href='${music.external_urls.spotify}' target='_blank'>Ouve Agora</a>
+        <button onclick="moreContent('${music.name}','${music.artists[0].name}')">Ver mais</button>`
+        allMusics.appendChild(musicDiv)
     })
   }catch(error){
-    console.log('ERROR: ' + error)
+    console.error('ERROR: ' + error)
+  } finally{
+    loadingAllMuscis.style.display = 'none'
   }
 })
+
+let stopFetch;
+
+// * SHOW THE BIO AND THE LYRICS
+async function moreContent(music, artist) {
+  const popup = document.querySelector('.popup')
+  const titleLyrics = document.querySelector('.title-lyrics')
+  const titleBio = document.querySelector('.title-bio')
+  const lyricsContent = document.getElementById('lyrics-content')
+  const biographyContent = document.getElementById('biography-content')
+  const biographyContainer = document.querySelector('.bio-container')
+  const loadingPopup = document.querySelector('.loading-popup')
+
+  if(stopFetch){
+    stopFetch.abort()
+  }
+
+  stopFetch = new AbortController()
+  const signal = stopFetch.signal
+
+  try{
+    //* SHOW THE POP UP AND THE LOADING
+    loadingPopup.style.display = 'block'
+    popup.style.display = 'block'
+
+    //* HIDE THE TITLES
+    titleLyrics.style.display = 'none'
+    titleBio.style.display = 'none'
+
+    //* FETCH THE LYRICS
+    const lyricsResponse = await fetch(`api/lyrics-ovh/lyrics?artist=${encodeURIComponent(artist)}&music=${encodeURIComponent(music)}`, {signal})
+    const lyrics = await lyricsResponse.json()
+    console.log(lyrics)
+
+    //*FETCH THE BIO
+    const biographyResponse = await fetch(`api/wikipedia/bio?artist=${encodeURIComponent(artist)}`, {signal})
+    const biography = await biographyResponse.json()
+    console.log(biography)
+
+    //* SHOW TITLES
+    titleBio.style.display = 'block'
+    titleLyrics.style.display = 'block'
+
+    //* SHOW THE BIO AND THE LYRICS
+    lyricsContent.innerHTML = ''
+    biographyContent.innerHTML = biography.extract_html
+
+    // * ADD LYRICS AS PARAGRAPHS
+    const lines = lyrics.split('\n');
+    lines.forEach(line => {
+      const p = document.createElement('p');
+      p.textContent = line;
+      lyricsContent.appendChild(p);
+    });
+
+    if (biography.thumbnail && biography.thumbnail.source) {
+      const imgArtist = document.createElement('img');
+      imgArtist.src = biography.thumbnail.source;
+      imgArtist.alt = artist;
+      imgArtist.classList.add('img-artist');
+      biographyContainer.appendChild(imgArtist);
+    }
+  }catch(error){
+    console.error('ERROR: ' + error)
+  } finally{
+    loadingPopup.style.display = 'none'
+  }
+}
+function closePopup(){
+  //* CLEAN ALL TEXTS
+  const titleLyrics = document.querySelector('.title-lyrics')
+  const titleBio = document.querySelector('.title-bio')
+  const lyricsContent = document.getElementById('lyrics-content')
+  const biographyContent = document.getElementById('biography-content')
+  const biographyContainer = document.querySelector('.bio-container')
+  const imgArtist = document.querySelector('.img-artist')
+  titleLyrics.style.display = 'none'
+  titleBio.style.display = 'none' 
+  lyricsContent.innerHTML = ''
+  biographyContent.innerHTML = ''
+
+  if (imgArtist) {
+    biographyContainer.removeChild(imgArtist);
+  }
+  
+  //* CLOSE THE POPUP
+  const popup = document.querySelector('.popup')
+  popup.style.display = 'none'
+
+  //* STOP FETCH
+  if(stopFetch){
+    stopFetch.abort()
+  }
+}
+
+//* SEARCH THE ARTIST
+async function searchArtist() {
+  const searchInput = document.getElementById('search-input')
+  const allMusics = document.querySelector('.all-musics')
+  const loadingAllMusics = document.querySelector('.loading-allMusics')
+
+  try{
+    loadingAllMusics.style.display = 'block'
+    const response = await fetch(`api/spotify/search?artist=${encodeURIComponent(searchInput.value)}`)
+    const musics = await response.json()
+    allMusics.innerHTML = ''
+    console.log(musics)
+    musics.forEach((music) => {
+      const musicDiv = document.createElement('div')
+      musicDiv.classList.add('music-item')
+      musicDiv.innerHTML = `
+        <h3>${music.name}</h3>
+        <p>${music.artists.map(artist => artist.name).join(', ')}</p>
+        <a href='${music.external_urls.spotify}' target='_blank'>Ouve Agora</a>
+        <button onclick="moreContent('${music.name}','${music.artists[0].name}')">Ver mais</button>`
+        allMusics.appendChild(musicDiv)
+    })
+  }catch(error){
+    console.error('ERROR: ', error)
+  }finally{
+    loadingAllMusics.style.display = 'none'
+  }
+}
