@@ -20,12 +20,12 @@ app.get('/', (req, res) => {
 })
 
 //* ENDPOINT FOR THE LAST COMMIT
-app.get('/api/github/last-commit', async(req, res) =>{
-  try{
+app.get('/api/github/last-commit', async (req, res) => {
+  try {
     const response = await axios.get('https://api.github.com/repos/DiogoGaspar6/SoundVerse/commits')
     const lastCommit = response.data[0]
     res.json(lastCommit)
-  }catch(error){
+  } catch (error) {
     res.status(500).send('ERROR: ' + error)
   }
 })
@@ -43,8 +43,8 @@ app.get('/api/lastfm/all-music', async (req, res) => {
 })
 
 //* ENDPOINT TO THE SPOTIFY TOKEN
-app.get('/api/spotify/token', async (req, res) =>{
-  try{
+app.get('/api/spotify/token', async (req, res) => {
+  try {
     const response = await axios.post('https://accounts.spotify.com/api/token', qs.stringify({
       grant_type: 'client_credentials',
     }), {
@@ -54,7 +54,7 @@ app.get('/api/spotify/token', async (req, res) =>{
       }
     })
     res.json(response.data)
-  }catch(error){
+  } catch (error) {
     res.status(500).send('ERROR: ', error)
   }
 })
@@ -71,7 +71,7 @@ app.get('/api/spotify/all-tracks', async (req, res) => {
         'Authorization': `Bearer ${accessToken}`
       },
       params: {
-        limit: 50 
+        limit: 50
       }
     })
 
@@ -79,9 +79,9 @@ app.get('/api/spotify/all-tracks', async (req, res) => {
     const albums = trackResponse.data.albums.items
     const tracks = []
 
-    for (const album of albums){
+    for (const album of albums) {
       const albumTracksResponse = await axios.get(`https://api.spotify.com/v1/albums/${album.id}/tracks`, {
-        headers:{
+        headers: {
           'Authorization': `Bearer ${accessToken}`
         }
       })
@@ -95,26 +95,26 @@ app.get('/api/spotify/all-tracks', async (req, res) => {
 })
 
 //* ENDPOINT TO THE BIOGRAPHY
-app.get('/api/wikipedia/bio', async(req, res) =>{
+app.get('/api/wikipedia/bio', async (req, res) => {
   const artist = req.query.artist
-  try{
+  try {
     const response = await axios.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(artist)}`)
     res.json(response.data)
-  }catch(error){
+  } catch (error) {
     res.status(500).send('ERROR: ' + error)
   }
 })
 
 //* ENDPOINT TO THE LYRICS
-app.get('/api/lyrics-ovh/lyrics', async(req, res) => {
+app.get('/api/lyrics-ovh/lyrics', async (req, res) => {
   const artist = req.query.artist
   const music = req.query.music
-  try{
+  try {
     const searchResponse = await axios.get(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(music)}`)
     const lyricsResponse = searchResponse.data.lyrics
     // console.log(searchResponse.data)
     res.json(lyricsResponse)
-  }catch(error){
+  } catch (error) {
     if (error.response && error.response.status === 404) {
       res.status(404).send('Lyrics not found');
     } else {
@@ -124,9 +124,9 @@ app.get('/api/lyrics-ovh/lyrics', async(req, res) => {
 })
 
 //* ENDPOINT TO SEARCH ARTIST
-app.get('/api/spotify/search', async(req, res) => {
+app.get('/api/spotify/search', async (req, res) => {
   const artist = req.query.artist
-  try{
+  try {
     const tokenResponse = await axios.get(`http://localhost:${PORT}/api/spotify/token`)
     const accessToken = tokenResponse.data.access_token
 
@@ -140,6 +140,9 @@ app.get('/api/spotify/search', async(req, res) => {
       }
     })
 
+    if(searchResponse.data.artists.items.length === 0){
+      return res.status(404).send('Artist not found')
+    }
     const artistId = searchResponse.data.artists.items[0].id
 
     const musicResponse = await axios.get(`https://api.spotify.com/v1/artists/${artistId}/top-tracks`, {
@@ -149,8 +152,8 @@ app.get('/api/spotify/search', async(req, res) => {
     })
 
     res.json(musicResponse.data.tracks)
-  }catch(error){
-    res.status(500).send('ERROR: ', error)
+  } catch (error) {
+    return res.status(500).send('ERROR: ', error)
   }
 })
 
