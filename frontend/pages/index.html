@@ -3,14 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- GOOGLE ICONS -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!--* FAVICON -->
+    <link rel="shortcut icon" href="../styles/images/SOUNDVERSE.pngx" type="image/x-icon">
 
+    <!-- * GOOGLE ICONS -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
 
-    <!-- CSS -->
+    <!-- * CSS -->
     <link rel="stylesheet" href="../styles/index.css" defer />
 
-    <!-- SCRIPTS -->
+    <!-- * SCRIPTS -->
     <script src="../scripts/index.js"></script>
     <title>SoundVerse</title>
   </head>
@@ -18,32 +23,86 @@
     <header>
       <div class="githubCommit">
         <p>A carregar o ultimo commit..</p>
-        <!-- here i want to go the last commit from the github api and add the animation like scrolling to the left -->
+        <!-- * here i want to go the last commit from the github api and add the animation like scrolling to the left -->
       </div>
       <div class="head">
         <img src="../styles/images/SOUNDVERSE.png" alt="logotipo" />
         <nav>
           <ul>
-            <li>Sobre nos</li>
+            <a href="#about-us"><li>Sobre nos</li></a>
           </ul>
         </nav>
       </div>
     </header>
     <main>
+      <div class="popup">
+        <div class="popup-content">
+          <span id="close" class="material-symbols-outlined" onclick="closePopup()"> close </span>
+          <div class="loading-popup"></div>
+          <h2 class="title-lyrics">Letra</h2>
+          <div id="lyrics-content" class="lyrics-container"></div>
+          <p id="lyrics-content"></p>
+          <h2 class="title-bio">Biografia</h2>
+          <div class="bio-container">
+            <p id="biography-content"></p>
+          </div>
+        </div>
+      </div>
       <h1>Bem vindo 👋</h1>
-      <p>Pesquise o seu artista favorito e veja as suas musicas e muito mais!</p>
+      <p>
+        Pesquise o seu artista favorito e veja as suas musicas e muito mais!
+      </p>
 
       <div class="search">
-        <input type="text" placeholder="Pesquise o seu artista favorito" />
-        <div class="icon-search"><span class="material-symbols-outlined"> search </span></div>
+        <input type="text" id="search-input" name="search-input" placeholder="Pesquise o seu artista favorito" />
+        <div class="icon-search" onclick="searchArtist()">
+          <span class="material-symbols-outlined"> search </span>
+        </div>
       </div>
 
       <div class="results">
-        <!-- here goes the results of the search -->
+        <div class="top-musics">
+          <h1>
+            Top Musics <span class="material-symbols-outlined"> star </span>
+          </h1>
+          <div class="loading-topMusics"></div>
+        </div>
+        <div class="all-musics">
+          <h1>
+            Musicas <span class="material-symbols-outlined"> music_note </span>
+          </h1>
+          <div class="loading-allMusics"></div>
+        </div>
       </div>
 
-      <div class="about-us">
-        
+      <div id="about-us" class="about-us">
+        <h1>Sobre nos</h1>
+        <div class="about-us-container">
+          <div class="left-about-us">
+            <div class="information">
+              <img src="../styles/images/logo-diogo.jpg" alt="Diogo Gaspar" />
+              <p>
+                Olá, sou o
+                <a href="https://github.com/DiogoGaspar6" target="_blank">Diogo Gaspar</a>
+                estudo no IPVC - ESTG <br />
+                estou no curso de Engenharia Informatica <br />
+                e moro em Vila Praia de Ancora
+              </p>
+            </div>
+          </div>
+          <div class="right-about-us">
+            <div class="information">
+              <img src="../styles/images/logo-diogo.jpg" alt="Diogo Gaspar" />
+              <p>
+                Olá, sou o
+                <a href="https://github.com/DiogoGaspar6">Diogo Gaspar</a>
+                estudo no IPVC - ESTG <br />
+                estou no curso de Engenharia Informatica <br />
+                e moro em Vila Praia de Ancora
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </body>
