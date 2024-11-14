@@ -12,7 +12,7 @@ A SoundVerse é uma aplicação web que permite aos utilizadores pesquisarem art
 Acesse o repositório completo no GitHub: [SoundVerse Repository](https://github.com/DiogoGaspar6/SoundVerse)
 
 ## 📢 Publicação
-A aplicação está disponível em: [Endereço de publicação](https://link-da-publicacao)
+A aplicação está disponível em: [Endereço de publicação](https://soundverse.onrender.com)
 
 ## 📄 Descrição do Projeto (Mini-relatório)
 
