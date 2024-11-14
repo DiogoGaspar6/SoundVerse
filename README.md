@@ -1,23 +1,23 @@
-# SoundVerse 🎶 
+# SoundVerse
 
 A SoundVerse é uma aplicação web que permite aos utilizadores pesquisarem artistas, explorarem músicas populares e visualizarem detalhes adicionais como biografias e letras. O projeto foi desenvolvido como parte do curso de Engenharia Informática no IPVC - ESTG.
 
-## 👥 Membros do Grupo
+## Autores do Trabalho
 - **Diogo Gaspar**  
   GitHub: [DiogoGaspar6](https://github.com/DiogoGaspar6)
 - **Gustavo Barbosa**  
   GitHub: [GustavoBarbosa2](https://github.com/GustavoBarbosa2)
 
-## 🌐 Repositório GitHub
-Acesse o repositório completo no GitHub: [SoundVerse Repository](https://github.com/DiogoGaspar6/SoundVerse)
+## Repositório GitHub
+O repositório encontra-se no GitHub: [SoundVerse Repository](https://github.com/DiogoGaspar6/SoundVerse)
 
-## 📢 Publicação
+## Publicação
 A aplicação está disponível em: [https://soundverse.onrender.com](https://soundverse.onrender.com)
 
-## 📄 Descrição do Projeto (Mini-relatório)
+## Descrição do Projeto (Mini-relatório)
 
 ### Objetivo do Projeto
-O objetivo do SoundVerse é proporcionar uma experiência interativa e acessível para os fãs de música, permitindo que descubram novas músicas, visualizem letras e aprendam mais sobre seus artistas favoritos. 
+O objetivo do SoundVerse é proporcionar uma experiência interativa e acessível para os fãs de música, permitindo que descubram novas músicas, visualizem letras e consigam ter mais informações sobre seus artistas favoritos. 
 
 ### Funcionalidades Principais
 - **Top Músicas**: Lista de músicas populares utilizando a API Last.fm.
@@ -40,7 +40,17 @@ As requisições às APIs são feitas no backend com o **Express.js** e enviadas
 - **QS (Query String)**: Para formatar e enviar dados da autenticação Spotify.
 - **Frontend**: HTML, CSS e JavaScript puro, com Google Icons para os ícones e animações customizadas.
 
-## ⚙️ Instruções de Instalação
+### Endpoints da API
+- **GET /**: Retorna a pagina inicial da aplicação.
+- **GET /api/github/last-commit**: Retorna o ultimo commit do repostiorio e que "merged" na main.
+- **GET /api/lastfm/all-music**: Retorna as top tracks da api LAST.FM 
+- **GET /api/spotify/token**: É o endpoint para retornar o token do spotify para conseguir posteriormente utilizar a api do spotify
+- **GET /api/spotify/all-tracks**: Retorna as musicas "new realeases", foi a forma que decidimos para retornar as musicas do spotify pois é impossivel retornar TODAS as musicas do spotify
+- **GET /api/wikipedia/bio**: Retorna a biografia de um artista, que é passado neste endpoint da API externa **https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(artist)}**
+- **GET /api/lyrics-ovh/lyrics**: Retorna as letras da musica que passa como query o nome do artista e o nome da musica e usamos o endpoint da API externa **https://api.lyrics.ovh/v1/{encodeURIComponent(artist)}/${encodeURIComponent(music)}**
+- **GET /api/spotify/search**: Retorna todas as musicas que sao do artista que é passado como query
+
+## Instruções de Instalação
 
 ### Pré-requisitos
 - Node.js e npm instalados
